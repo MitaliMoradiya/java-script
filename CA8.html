@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Drawings</title>
+</head>
+<body  onload="draw();">
+
+    <canvas id="myCanvas1" width="400" height="500" style="border:1px double pink"></canvas>
+    <canvas id="myCanvas2" width="400" height="500" style="border:1px dotted blue"></canvas>
+    <canvas id="myCanvas3" width="400" height="500" style="border:1px dotted purple"></canvas>
+
+
+    <script>
+        function drawCircles(canvasId) {
+            var ctx = document.getElementById(canvasId).getContext("2d");
+            var counter = 0;
+
+            for (var i = 0; i < 6; i++) {
+                for (var j = 0; j < 6; j++) {
+                    // Start from white and goes to black
+                    ctx.fillStyle = "rgb(" + Math.floor(255 - 42.5 * i) + "," + Math.floor(255 - 42.5 * i) +
+                        "," + Math.floor(255 - 42.5 * j) + ")";
+                    ctx.beginPath();
+                    if (i === counter && j === counter) {
+                        // creates the circles
+                        ctx.arc(25 + j * 50, 30 + i * 50, 20, 0, Math.PI * 2, true);
+                        ctx.fill();
+                        // creates a border around the circles so the white one will be visible
+                        ctx.stroke();
+                    }
+                }
+                counter++;
+            }
+        }
+
+        // Draw the circles on the first canvas
+        drawCircles("myCanvas1");
+
+        // Draw the rectangles with transparency on the second canvas
+        const c2 = document.getElementById("myCanvas2");
+        const ctx2 = c2.getContext("2d");
+        ctx2.fillStyle = "red";
+        ctx2.fillRect(20, 20, 195, 180);
+
+        // Turn transparency on
+        ctx2.globalAlpha = 0.2;
+        ctx2.fillStyle = "blue";
+        ctx2.fillRect(50, 50, 195, 190);
+        
+
+
+    function draw() 
+{
+  var canvas = document.getElementById('myCanvas3');
+  if (canvas.getContext)
+  {
+    var context = canvas.getContext('2d');
+    context.beginPath();
+   // Outer circle
+    context.arc(75,75,50,0,Math.PI*2,true);
+    context.moveTo(110,75);
+    // Mouth 
+    context.arc(75,75,35,0,Math.PI,false); 
+    // Lefy and Right eye
+    context.moveTo(55,65);
+    context.arc(60,65,5,0,Math.PI*2,true); 
+    context.arc(90,65,5,0,Math.PI*2,true);
+    context.stroke();
+  }
+}
+
+
+    </script>
+
+</body>
+</html>
+
